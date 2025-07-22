@@ -136,6 +136,11 @@ Stay focused, concise, and only on Custom Designs furniture matters.`
     }
 });
 
+// Serve main page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', openai: !!process.env.OPENAI_API_KEY });
