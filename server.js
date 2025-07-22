@@ -33,6 +33,15 @@ const COMPANY_INFO = {
         phone: "(02) 9680 3033"
     },
     
+    // Business Details
+    owner: "Vladimir",
+    yearsInBusiness: 25,
+    founded: "~2000",
+    staff: {
+        jenny: "Jenny (design consultant)",
+        kylie: "Kylie (operations/quotes)"
+    },
+    
     // Heritage & Manufacturing
     heritage: "Proud Australian wood-craft tradition using locally sourced timbers and materials, integrating natural beauty and rich cultural traditions of Australia into modern designs",
     manufacturing: "All furniture built locally ensuring tight quality control and short lead times",
@@ -132,6 +141,11 @@ CONTACT INFORMATION:
 - Phone: ${COMPANY_INFO.store.phone}
 - Website: ${COMPANY_INFO.website}
 - Instagram: ${COMPANY_INFO.social.instagram}
+
+BUSINESS DETAILS:
+- Owner: ${COMPANY_INFO.owner}
+- Years in Business: ${COMPANY_INFO.yearsInBusiness} years (founded ${COMPANY_INFO.founded})
+- Staff: ${COMPANY_INFO.staff.jenny}, ${COMPANY_INFO.staff.kylie}
 
 KEY FEATURES & BENEFITS:
 - ${COMPANY_INFO.warranty} on every piece
