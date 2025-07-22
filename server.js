@@ -141,8 +141,14 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', openai: !!process.env.OPENAI_API_KEY });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🤖 Chatbot server running at http://localhost:${PORT}`);
-    console.log(`🌐 Also accessible at http://192.168.0.141:${PORT}`);
-    console.log(`📡 OpenAI integration: ${process.env.OPENAI_API_KEY ? '✅ Enabled' : '❌ Missing API key'}`);
-});
+// For Vercel deployment, export the app
+module.exports = app;
+
+// For local development, start the server
+if (require.main === module) {
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`🤖 Chatbot server running at http://localhost:${PORT}`);
+        console.log(`🌐 Also accessible at http://192.168.0.141:${PORT}`);
+        console.log(`📡 OpenAI integration: ${process.env.OPENAI_API_KEY ? '✅ Enabled' : '❌ Missing API key'}`);
+    });
+}
