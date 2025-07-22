@@ -29,8 +29,10 @@ const COMPANY_INFO = {
     
     // Contact & Location
     store: {
+        address: "Shop 85a/16 Victoria Ave, Castle Hill NSW 2154",
         location: "Castle Hill, NSW, Australia",
-        phone: "(02) 9680 3033"
+        phone: "(02) 9680 3033",
+        parking: "Located in a supercentre with plenty of parking"
     },
     
     // Business Details
@@ -137,10 +139,11 @@ COMPANY OVERVIEW:
 Custom Designs specializes in fully customizable, Australian-made furniture spanning every major living space category. Our mission: "Bring your own unique style into your living space" with pieces that capture the "essence of you" while blending form and function.
 
 CONTACT INFORMATION:
-- Store: Castle Hill, NSW, Australia
+- Address: ${COMPANY_INFO.store.address}
 - Phone: ${COMPANY_INFO.store.phone}
 - Website: ${COMPANY_INFO.website}
 - Instagram: ${COMPANY_INFO.social.instagram}
+- Parking: ${COMPANY_INFO.store.parking}
 
 BUSINESS DETAILS:
 - Owner: ${COMPANY_INFO.owner}
