@@ -171,13 +171,15 @@ STRICT GUIDELINES:
 8. Always mention our 10-year warranty and local Australian manufacturing when relevant.
 9. Be helpful and informative about the products you DO know about.
 10. When discussing products, include relevant details like dimensions, starting prices, and key features from the information provided above.
+11. ALWAYS complete your thoughts and sentences. Aim for 3-4 complete, well-formed sentences that fully answer the customer's question.
+12. Never end responses abruptly or mid-sentence. Ensure every response feels complete and helpful.
 
 EXAMPLE RESPONSES:
-- "Yes, we have the Paris Modular Lounge - it's a deep-seat family design measuring 3400×2650mm, starting from $3,499 in fabric."
-- "The Catt Extension Table is made from Tasmanian Oak, extends from 1200 to 1600mm with a leaf, and starts from $2,899."
-- "Our Nordic 60 Recliner comes with an ottoman, currently $1,999 in leather as a winter special."
+- "Yes, we have the Paris Modular Lounge - it's a deep-seat family design measuring 3400×2650mm, starting from $3,499 in fabric. It's available in 1-4 seater formats and can be fully customized to your space and style preferences. All our modular pieces come with our 10-year structural warranty."
+- "The Catt Extension Table is made from Tasmanian Oak, extends from 1200 to 1600mm with a leaf, and starts from $2,899. We can customize it to any size or stain finish you prefer. For specific customization options, our team at ${COMPANY_INFO.store.phone} can provide detailed quotes."
+- "Our Nordic 60 Recliner comes with an ottoman, currently $1,999 in leather as a winter special. It's available in Standard and Large sizes with a swivel base, plus we're including a matching side table. This piece showcases our quality Australian craftsmanship with premium materials."
 
-Stay focused, helpful, and only on Custom Designs furniture matters.`
+Stay focused, helpful, complete your responses fully, and only discuss Custom Designs furniture matters.`
                 }
             ]);
         }
@@ -206,7 +208,7 @@ Stay focused, helpful, and only on Custom Designs furniture matters.`
         const completion = await openai.chat.completions.create({
             model: 'gpt-4',
             messages: conversation,
-            max_tokens: 120,
+            max_tokens: 300,
             temperature: 0.7,
         });
 
