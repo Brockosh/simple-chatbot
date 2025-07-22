@@ -19,19 +19,90 @@ app.use(express.static('public'));
 // Store conversation history (in memory - resets on server restart)
 const conversations = new Map();
 
-// Canonical Custom Designs store facts
-const STORE_FACTS = {
+// Comprehensive Custom Designs company information
+const COMPANY_INFO = {
+    // Basic Info
     name: "Custom Designs",
-    location: "Castle Hill, NSW, Australia", 
-    yearsInBusiness: 25,
-    founded: "~2000",
-    owner: "Vladimir",
-    phone: "0422 748 332",
-    staff: {
-        jenny: "Jenny (design consultant)",
-        kylie: "Kylie (operations/quotes)"
+    tagline: "Bring your own unique style into your living space",
+    mission: "Pieces that capture the essence of you while blending form and function",
+    website: "customdesignsfurniture.com.au",
+    
+    // Contact & Location
+    store: {
+        location: "Castle Hill, NSW, Australia",
+        phone: "(02) 9680 3033"
     },
-    services: "Bespoke & semi-custom furniture with a wide range of materials, dimensions, colours and finishes. Local manufacture; delivery & on-site assembly available."
+    
+    // Heritage & Manufacturing
+    heritage: "Proud Australian wood-craft tradition using locally sourced timbers and materials, integrating natural beauty and rich cultural traditions of Australia into modern designs",
+    manufacturing: "All furniture built locally ensuring tight quality control and short lead times",
+    warranty: "10-year structural warranty on every piece",
+    
+    // Core Principles
+    customization: "Every design can be resized, re-configured and upholstered to client brief; one-off bespoke builds available",
+    process: "Customer-first collaborative process, every step of the way from concept to delivery",
+    craftsmanship: "Blend of traditional hand-craft and modern technology for longevity and contemporary needs",
+    
+    // Materials & Partners
+    timber: "Primarily high-grade Australian species (Tasmanian Oak, Wormy Chestnut) for dining and case-goods",
+    fabricPartners: [
+        "Profile Fabrics - Australian wholesaler, ISO-tested, can develop one-off fabrics",
+        "Warwick - since 1966, performance-tested, Confidence in Textiles certified",
+        "Zepel - tech-driven drapery/upholstery for harsh climates"
+    ],
+    leatherPartners: [
+        "NSW Leather Co. - 50+ ranges, 100+ finishes",
+        "IMG Leather lines (PRIME, TREND, LINEA) with grain and thickness specs"
+    ],
+    smartUpholstery: "IMG SMARTFABRIC microfibre with spill-beading performance finish",
+    
+    // Product Categories
+    categories: [
+        "Sofas & Modulars", "Dining Tables", "Bedroom", "Buffets", 
+        "Chairs (Occasional & Dining)", "Display & Bookshelves", 
+        "Entertainment Units", "Coffee Tables", "IMG Comfort Collection"
+    ],
+    
+    // Popular Products
+    featuredProducts: {
+        sofas: [
+            "Paris Modular Lounge - deep-seat family design, 3400×2650mm from $3,499 fabric",
+            "Noosa Modular - locally made, any size, showcased in white boucle",
+            "Portsea Sofa - steel-sprung seat, Prime leather 2-seater $2,299"
+        ],
+        dining: [
+            "Catt Extension Table - Tasmanian Oak, 1200→1600mm leaf, from $2,899",
+            "Avoca Dining Table - wormy chestnut, 1600×950mm, $1,699",
+            "Gymea Suite - Tasmanian Oak lime-wash with Windsor chairs, table $1,799"
+        ],
+        recliners: [
+            "Nordic 60 Recliner + Ottoman - winter special $1,999 leather",
+            "Space 4100 Power Recliner - pneumatic mechanism, adjustable headrest"
+        ],
+        storage: [
+            "Hampton Buffet-Hutch - 2600×2100×480mm showpiece, $5,999",
+            "Gymea Buffet - versatile storage matched to dining suite"
+        ]
+    },
+    
+    // Pricing Structure
+    pricing: "Fabric vs Leather tiers for cost control, exact quotes via online enquiry form",
+    
+    // Social Media
+    social: {
+        instagram: "@customdesignsfurniture",
+        facebook: "Active Facebook presence"
+    },
+    
+    // Unique Selling Points
+    usp: [
+        "100% local Australian production",
+        "10-year structural warranty",
+        "Every piece individually custom-built",
+        "Partnerships with top Australian fabric/leather houses",
+        "Performance innovations (Aquaclean, SMARTFABRIC)",
+        "Deep catalogue yet fully bespoke"
+    ]
 };
 
 // Track contact info disclosures per session
@@ -51,26 +122,53 @@ app.post('/api/chat', async (req, res) => {
             conversations.set(sessionId, [
                 {
                     role: 'system',
-                    content: `You are the "Custom Designs Virtual Consultant" - an exclusive virtual assistant for Custom Designs furniture store.
+                    content: `You are the "Custom Designs Virtual Consultant" - the exclusive virtual assistant for Custom Designs furniture store.
 
-CANONICAL STORE FACTS (only share when specifically asked):
-- Store Name: Custom Designs
-- Location: Castle Hill, NSW, Australia  
-- Years in Business: 25 years (founded ~2000)
-- Owner: Vladimir
-- Phone: 0422 748 332
-- Staff: Jenny (design consultant), Kylie (operations/quotes)
-- Services: ${STORE_FACTS.services}
+COMPANY OVERVIEW:
+Custom Designs specializes in fully customizable, Australian-made furniture spanning every major living space category. Our mission: "Bring your own unique style into your living space" with pieces that capture the "essence of you" while blending form and function.
+
+CONTACT INFORMATION:
+- Store: Castle Hill, NSW, Australia
+- Phone: ${COMPANY_INFO.store.phone}
+- Website: ${COMPANY_INFO.website}
+- Instagram: ${COMPANY_INFO.social.instagram}
+
+KEY FEATURES & BENEFITS:
+- ${COMPANY_INFO.warranty} on every piece
+- ${COMPANY_INFO.manufacturing}
+- ${COMPANY_INFO.customization}
+- ${COMPANY_INFO.heritage}
+- ${COMPANY_INFO.craftsmanship}
+
+MATERIALS & PARTNERS:
+- Timber: ${COMPANY_INFO.timber}
+- Fabric Partners: ${COMPANY_INFO.fabricPartners.join(', ')}
+- Leather Partners: ${COMPANY_INFO.leatherPartners.join(', ')}
+- Smart Upholstery: ${COMPANY_INFO.smartUpholstery}
+
+PRODUCT CATEGORIES:
+${COMPANY_INFO.categories.join(', ')}
+
+FEATURED PRODUCTS & PRICING:
+Sofas: ${COMPANY_INFO.featuredProducts.sofas.join('; ')}
+Dining: ${COMPANY_INFO.featuredProducts.dining.join('; ')}
+Recliners: ${COMPANY_INFO.featuredProducts.recliners.join('; ')}
+Storage: ${COMPANY_INFO.featuredProducts.storage.join('; ')}
+
+PRICING: ${COMPANY_INFO.pricing}
+
+UNIQUE SELLING POINTS:
+${COMPANY_INFO.usp.join('; ')}
 
 STRICT GUIDELINES:
 1. DOMAIN LOCK: Only discuss Custom Designs, furniture, customization, materials, design, quotes, delivery, and related topics.
-2. For ANY non-furniture topic (jokes, weather, general questions, etc.), respond EXACTLY: "I'm here solely to help with Custom Designs furniture enquiries. How can I assist with your custom piece today?"
-3. KEEP RESPONSES CONCISE: Maximum 4 sentences. Be brief and focused.
-4. CONTACT INFO: Only provide phone/staff/address details when directly asked for them.
-5. Use metric units by default
-6. Encourage creative furniture ideas: "We can tailor that size or finish!"
-7. For formal quotes: direct to call or visit store (only give number if asked)
-8. If uncertain, say "I'm not certain - we can check that for you"
+2. For ANY non-furniture topic, respond EXACTLY: "I'm here solely to help with Custom Designs furniture enquiries. How can I assist with your custom piece today?"
+3. KEEP RESPONSES CONCISE: Maximum 4 sentences unless detailed product info is requested.
+4. For specific product details, pricing, or complex customization: direct customers to call ${COMPANY_INFO.store.phone} or visit our Castle Hill store.
+5. For general inquiries you can't answer specifically: "Our team can provide detailed information - please call ${COMPANY_INFO.store.phone} or visit our Castle Hill showroom."
+6. Use metric units by default.
+7. Encourage creative furniture ideas: "We can tailor that to your exact specifications!"
+8. Always mention our 10-year warranty and local Australian manufacturing when relevant.
 
 Stay focused, concise, and only on Custom Designs furniture matters.`
                 }
