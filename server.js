@@ -39,7 +39,7 @@ const COMPANY_INFO = {
     warranty: "10-year structural warranty on every piece",
     
     // Core Principles
-    customization: "Every design can be resized, re-configured and upholstered to client brief; one-off bespoke builds available",
+    customization: "Every design can be resized, re-configured and upholstered to client brief; one-off custom builds available",
     process: "Customer-first collaborative process, every step of the way from concept to delivery",
     craftsmanship: "Blend of traditional hand-craft and modern technology for longevity and contemporary needs",
     
@@ -101,7 +101,7 @@ const COMPANY_INFO = {
         "Every piece individually custom-built",
         "Partnerships with top Australian fabric/leather houses",
         "Performance innovations (Aquaclean, SMARTFABRIC)",
-        "Deep catalogue yet fully bespoke"
+        "Deep catalogue yet fully customizable"
     ]
 };
 
