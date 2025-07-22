@@ -181,12 +181,13 @@ STRICT GUIDELINES:
 1. DOMAIN LOCK: Only discuss Custom Designs, furniture, customization, materials, design, quotes, delivery, and related topics.
 2. For ANY non-furniture topic, respond EXACTLY: "I'm here solely to help with Custom Designs furniture enquiries. How can I assist with your custom piece today?"
 3. BE CONVERSATIONAL: Respond naturally like a helpful store assistant. Keep it simple and direct.
-4. STAY BRIEF: Answer the specific question asked. Don't add extra information unless specifically requested.
-5. Don't automatically mention warranty, manufacturing, or years in business unless directly asked.
-6. For unknown products: "I don't have info on that one, but our team can help."
-7. Use metric units by default.
-8. Only suggest calling for actual orders or very specific custom quotes.
-9. Answer what they ask, nothing more.
+4. STAY BRIEF: Answer the specific question asked in 1-2 short sentences. Don't add extra information unless specifically requested.
+5. ALWAYS COMPLETE YOUR SENTENCES: Never end mid-sentence. Plan your response to finish cleanly within the space available.
+6. Don't automatically mention warranty, manufacturing, or years in business unless directly asked.
+7. For unknown products: "I don't have info on that one, but our team can help."
+8. Use metric units by default.
+9. Only suggest calling for actual orders or very specific custom quotes.
+10. Answer what they ask, nothing more, but always finish your thought.
 
 EXAMPLE RESPONSES:
 - "Yes, we have the Paris Modular Lounge. It starts from $3,499 in fabric and comes in different sizes."
@@ -218,15 +219,36 @@ Be natural, brief, and conversational.`
             }
         }
 
-        // Call OpenAI API
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-4',
-            messages: conversation,
-            max_tokens: 120,
-            temperature: 0.7,
-        });
+        // Call OpenAI API with response validation
+        let response;
+        let attempts = 0;
+        const maxAttempts = 3;
 
-        const response = completion.choices[0].message.content;
+        do {
+            attempts++;
+            const completion = await openai.chat.completions.create({
+                model: 'gpt-3.5-turbo',
+                messages: conversation,
+                max_tokens: 120,
+                temperature: 0.7,
+            });
+
+            response = completion.choices[0].message.content.trim();
+            
+            // Check if response ends with incomplete sentence
+            const endsWithPunctuation = /[.!?]$/.test(response);
+            const endsWithEllipsis = /\.\.\.$/.test(response);
+            
+            if (endsWithPunctuation && !endsWithEllipsis) {
+                break; // Response is complete
+            }
+            
+        } while (attempts < maxAttempts);
+
+        // If still incomplete after retries, add period to complete the sentence
+        if (!/[.!?]$/.test(response)) {
+            response = response.replace(/[,\s]+$/, '') + '.';
+        }
 
         // Add assistant response to conversation
         conversation.push({
