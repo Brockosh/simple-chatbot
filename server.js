@@ -95,7 +95,7 @@ const COMPANY_INFO = {
     },
     
     // Pricing Structure
-    pricing: "Fabric vs Leather tiers for cost control, exact quotes via online enquiry form",
+    pricing: "Fabric vs Leather tiers for cost control, exact quotes available from our team",
     
     // Social Media
     social: {
